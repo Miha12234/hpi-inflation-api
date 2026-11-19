@@ -7,11 +7,12 @@ is no database or import step.
 
 ## Packaging
 
-[Download the ready-to-send ZIP](../hpi_inflation_api.zip) and send that file to
-the recipient. This link works when the ZIP and the `hpi_inflation_api` folder
-are in the same parent folder. The ZIP contains the Rails code, CSV, page
-assets, tests, and `Gemfile.lock` (the gem versions). It leaves out local
-secrets and runtime files.
+Download a source ZIP from [GitHub](https://github.com/Miha12234/hpi-inflation-api/archive/refs/heads/main.zip)
+or [GitLab](https://gitlab.com/Miha12234/hpi-inflation-api/-/archive/main/hpi-inflation-api-main.zip).
+If the ZIP is stored beside this project folder, you can also
+[download the locally packaged ZIP](../hpi_inflation_api.zip) and send it to the
+recipient. These ZIPs contain the Rails code, CSV, page assets, tests, and
+`Gemfile.lock` (the gem versions). Local secrets and runtime files are omitted.
 
 If you edit the project and need a **new** ZIP, open a terminal inside the
 `hpi_inflation_api` folder and run:
@@ -27,8 +28,8 @@ this packaging command; they unzip the file and follow the steps below.
 
 ## Run after unzipping
 
-Install Ruby 3.3.0 and Bundler 2.5 or newer. Then, in the unzipped
-`hpi_inflation_api` directory, run:
+Install Ruby 3.3.0 and Bundler 2.5 or newer. Then, in the folder created by
+unzipping the project, run:
 
 ```sh
 bundle install
