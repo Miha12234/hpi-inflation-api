@@ -1,0 +1,63 @@
+<div class="mb-4">
+  <p class="eyebrow mb-2">UK House Price Index</p>
+  <h1 class="display-5 fw-semibold mb-3">Compare a property price across time</h1>
+  <p class="lead text-secondary mb-0">Enter a price, choose an area and two months, then calculate its HPI-adjusted value.</p>
+</div>
+
+<div class="card calculator-card">
+  <div class="card-body p-4 p-md-5">
+    <% if @form.errors.any? %>
+      <div class="alert alert-danger" role="alert"><%= safe_join(@form.errors.full_messages, tag.br) %></div>
+    <% end %>
+
+    <%= form_with model: @form, url: calculate_path, method: :post, local: true,
+                  data: { controller: "inflation-form", action: "submit->inflation-form#submitting",
+                          inflation_form_month_order_message_value: CalculationForm::MONTH_ORDER_ERROR } do |form| %>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <%= form.label :price, "Original price (£)", class: "form-label fw-semibold" %>
+          <%= form.text_field :price, inputmode: "decimal",
+                              placeholder: "e.g. 100000", required: true, class: "form-control form-control-lg",
+                              data: { inflation_form_target: "price" } %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :borough, "Area", class: "form-label fw-semibold" %>
+          <%= form.select :borough, options_for_select(@areas, @form.borough), {},
+                          class: "form-select form-select-lg", data: { inflation_form_target: "borough" } %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :from_date, "From month", class: "form-label fw-semibold" %>
+          <%= form.text_field :from_date, type: "month", required: true,
+                               max: @form.to_date, class: "form-control form-control-lg",
+                               aria: { describedby: "month-order-error" },
+                               data: { inflation_form_target: "fromDate", action: "change->inflation-form#validateDates" } %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :to_date, "To month", class: "form-label fw-semibold" %>
+          <%= form.text_field :to_date, type: "month", required: true,
+                               min: @form.from_date, class: "form-control form-control-lg",
+                               aria: { describedby: "month-order-error" },
+                               data: { inflation_form_target: "toDate", action: "change->inflation-form#validateDates" } %>
+        </div>
+      </div>
+
+      <p id="month-order-error" class="text-danger small mt-3 mb-0 d-none" aria-live="polite"
+         data-inflation-form-target="dateError"><%= CalculationForm::MONTH_ORDER_ERROR %></p>
+      <p class="small text-secondary mt-3 mb-4">Available data: January 1995 to May 2016. Results are rounded to the nearest pound.</p>
+      <div class="d-flex flex-wrap gap-3 align-items-center">
+        <%= form.button "Calculate price", type: "submit", class: "btn btn-primary btn-lg px-4",
+                        data: { inflation_form_target: "submit" } %>
+        <button type="button" class="btn btn-link text-decoration-none" data-action="click->inflation-form#useExample">Quick Example</button>
+      </div>
+    <% end %>
+
+    <% if @form.result.present? %>
+      <section class="result-card p-4 mt-5" id="calculation-result" aria-live="polite">
+        <p class="text-uppercase small fw-semibold mb-2">Adjusted price</p>
+        <p class="result-amount mb-2">£<%= number_with_delimiter(@form.result.inflated_price) %></p>
+        <p class="mb-0"><%= @form.result.borough %> · <%= @form.result.from_month %> to <%= @form.result.to_month %></p>
+        <p class="small text-secondary mt-3 mb-0">Index: <%= number_with_precision(@form.result.from_index, precision: 2) %> → <%= number_with_precision(@form.result.to_index, precision: 2) %></p>
+      </section>
+    <% end %>
+  </div>
+</div>

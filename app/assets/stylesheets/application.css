@@ -1,0 +1,35 @@
+body {
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+.page-shell {
+  max-width: 900px;
+}
+
+.eyebrow {
+  color: #3659a8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.calculator-card {
+  border: 1px solid #e5eaf2;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgb(31 41 55 / 6%);
+}
+
+.result-card {
+  background: #ecf6f0;
+  border: 1px solid #c9e7d3;
+  border-radius: 0.85rem;
+}
+
+.result-amount {
+  color: #17663a;
+  font-size: clamp(2.2rem, 7vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
