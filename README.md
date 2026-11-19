@@ -5,26 +5,25 @@ property price between two months using the supplied UK HPI snapshot
 (`data/UK-HPI-2016-05.csv`). The CSV is bundled with the application, so there
 is no database or import step.
 
-## Packaging
+## Download the source code
 
-Download a source ZIP from [GitHub](https://github.com/Miha12234/hpi-inflation-api/archive/refs/heads/main.zip)
-or [GitLab](https://gitlab.com/Miha12234/hpi-inflation-api/-/archive/main/hpi-inflation-api-main.zip).
-If the ZIP is stored beside this project folder, you can also
-[download the locally packaged ZIP](../hpi_inflation_api.zip) and send it to the
-recipient. These ZIPs contain the Rails code, CSV, page assets, tests, and
-`Gemfile.lock` (the gem versions). Local secrets and runtime files are omitted.
+[Download source code from GitHub (ZIP)](https://github.com/Miha12234/hpi-inflation-api/archive/refs/heads/main.zip)
+or [download source code from GitLab (ZIP)](https://gitlab.com/Miha12234/hpi-inflation-api/-/archive/main/hpi-inflation-api-main.zip).
+Both links download the current `main` branch. The archives contain the Rails
+code, CSV, page assets, tests, and `Gemfile.lock` (the gem versions). Local
+secrets and runtime files are omitted. After unzipping, follow the steps below.
 
-If you edit the project and need a **new** ZIP, open a terminal inside the
-`hpi_inflation_api` folder and run:
+If you edit a local copy and want to make a separate ZIP to send, open a
+terminal inside the project folder and run:
 
 ```sh
 python3 bin/package.py
 ```
 
-That command writes `hpi_inflation_api.zip` in the folder containing the
-project folder. For example, a project at `/home/miha/project/hpi_inflation_api`
-produces `/home/miha/project/hpi_inflation_api.zip`. The recipient does not run
-this packaging command; they unzip the file and follow the steps below.
+That command writes a ZIP named after the project folder in its parent folder.
+For example, a project at `/home/miha/project/hpi_inflation_api` produces
+`/home/miha/project/hpi_inflation_api.zip`. The recipient does not run this
+packaging command; they unzip the file and follow the steps below.
 
 ## Run after unzipping
 
